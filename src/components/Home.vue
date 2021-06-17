@@ -1,5 +1,8 @@
 <template>
-<div>
+  <v-app>
+    <header-home></header-home>
+  <header class="flex-row"></header>
+  <div>
 
   <div>
     <v-container grid-list-md>
@@ -145,15 +148,29 @@
   </div>
 </div>
 
+  <footer-home/>
+
+  </v-app>
 </template>
 
 <script>
+
+import FooterHome from "./footer-home";
+import HeaderHome from "./header-home";
 export default {
-  name: "Home"
-  //
+  name: "home",
+  components: {HeaderHome, FooterHome},
+  data(){
+  },
+
 }
 </script>
 
 <style scoped>
+
+#logoAndButton{
+  display: flex;
+  flex-direction: row;
+}
 
 </style>

@@ -1,0 +1,14 @@
+{
+  "veterinaries": [
+    {"id": 2,"name": "Huellitas Seguras","tn":999666333,"src":"https://losmejoresdelima.com/wp-content/uploads/2019/03/Veterinarias.jpg"},
+    {"id": 3,"name": "PetSalud","tn":999666555,"src":"https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"},
+    {"id": 4,"name": "PetSalud","tn":999666555,"src":"https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"},
+    {"id": 5,"name": "Unkown","tn":999666555,"src":"https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"}
+  ],
+  "vetVeterinaries": [
+    {"vetId": 1,"veterinaryId": 2},
+    {"vetId": 1,"veterinaryId": 3},
+    {"vetId": 1,"veterinaryId": 4},
+    {"vetId": 6,"veterinaryId": 5}
+  ]
+}

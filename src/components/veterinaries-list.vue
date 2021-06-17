@@ -1,5 +1,8 @@
 <template>
+  <v-app>
   <v-container fluid>
+    <v-layout row wrap align-center>
+      <v-flex xs8 offset-md2>
     <v-row dense align="center">
       <v-col v-for="veterinary in displayVeterinaries" :key="veterinary.id" class="d-flex">
         <v-card margin="auto" class="mx-auto flex-column" min-width="250px" max-width="250px">
@@ -10,28 +13,38 @@
           </v-avatar>
           </div>
           <v-card-title  class="headline d-flex">{{ veterinary.name }}</v-card-title>
-          <v-spacer></v-spacer>
-          <v-card-subtitle>Número de contacto:</v-card-subtitle>
-          <v-card-subtitle>{{ veterinary.tn }}</v-card-subtitle>
+          <div id="data">
+            <h4 class="ml-3 font-weight-light">Telefono: {{ veterinary.tn }}</h4>
+            <h4 class="ml-3 font-weight-light">Fecha de creación: 24/5/2006</h4>
+            <h4 class="ml-3 font-weight-light">Genero: M</h4>
+          </div>
           <v-card-actions>
             <v-btn color="blue" class="d-flex"  @click="navigateToVeterinaryProfile(veterinary.id)">Mas informacion</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
+      </v-flex>
+    </v-layout>
   </v-container>
+  </v-app>
 </template>
 
 <script>
 import VeterinariesApiService from '../services/veterinaries-api.service';
 
 export default {
-  name: "veterinaries",
+  name: "veterinaries-list",
   data(){
     return {
       search:'',
       veterinaries: [],
-      displayVeterinaries: [{"id": 2,"name": "Huellitas Seguras","tn":999666333,"src":"https://losmejoresdelima.com/wp-content/uploads/2019/03/Veterinarias.jpg"},],
+      displayVeterinaries: [
+        {"id": 2,"name": "Huellitas Seguras","tn":999666333,"src":"https://losmejoresdelima.com/wp-content/uploads/2019/03/Veterinarias.jpg"},
+        {"id": 3,"name": "PetSalud","tn":999666555,"src":"https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"},
+        {"id": 4,"name": "PetSalud","tn":999666555,"src":"https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"},
+        {"id": 5,"name": "Unkown","tn":999666555,"src":"https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"}
+      ],
          editedIndex: -1,
       editedItem: {
         id: 0,
@@ -70,8 +83,8 @@ export default {
       return {
         id: veterinary.id,
         name: veterinary.name,
-        tn: 0,
-        src: ''
+        tn: veterinary.tn,
+        src: veterinary.src
       };
     },
     refreshList(id){
@@ -108,7 +121,7 @@ export default {
       this.close();
     },
     navigateToVeterinaryProfile(id){
-      this.$route.push({path: `/veterinaries/${id}`});
+      this.$router.push({name:'veterinary-profile',params:{id}});
     }
   },
   mounted() {
@@ -121,6 +134,13 @@ export default {
 
 *{
   //border: 3px solid black;
+}
+
+
+#data{
+  flex-direction: column;
+  display: flex;
+  text-align: left;
 }
 
 </style>
