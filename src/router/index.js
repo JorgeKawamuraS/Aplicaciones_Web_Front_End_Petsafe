@@ -38,6 +38,16 @@ const routes = [
     path: '/owner/:id',
     name: 'owner',
     component: () => import('../components/owner-profile')
+  },
+  {
+    path: '/owner/:id/schedule',
+    name: 'ownerSchedule',
+    component: () => import('../components/schedule')
+  },
+  {
+    path: '/vets/:id/schedule',
+    name: 'vetSchedule',
+    component: () => import('../components/schedule')
   }
 ]
 

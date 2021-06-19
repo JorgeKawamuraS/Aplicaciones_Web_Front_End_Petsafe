@@ -12,62 +12,32 @@
             step="1"
         >
           Completa tu información
-          <small>Llena los campos con tu correo y datos principales</small>
+          <small>Elije tu tipo de cuenta</small>
         </v-stepper-step>
 
         <v-stepper-content step="1">
-          <v-form class="cont" align="right"
-                  color="deep-purple accent-4"
-                  ref="form"
-                  v-model="valid"
-                  lazy-validation>
-
-            <v-text-field v-model="name"
-                          label="Full Name"
-                          required>
-            </v-text-field>
-
-            <v-text-field v-model="email"
-                          :rules="emailRules"
-                          label="E-mail"
-                          required>
-            </v-text-field>
-
-            <v-text-field v-model="pass"
-                          :counter="12"
-                          label="Password"
-                          required>
-            </v-text-field>
-
-            <v-text-field v-model="pass2"
-                          :counter="12"
-                          @change="passwordValidate"
-                          label="Confirm Password"
-                          required>
-            </v-text-field>
-
-
-            <v-container
-                class="px-0"
-                fluid
+          <div class="d-flex flex-row justify-space-between" id="userType">
+          <v-card>
+            <h1 class="text-center">Veterinario</h1>
+            <p>Profesional encargado de la salud de animales</p>
+            <v-btn
+                color="primary"
+                @click="e6 = e6+1;setAccountType('vet')"
             >
-              <v-radio-group v-model="row" mandatory row class="mb-0 ma-auto pa-0">
-                <v-radio
-                    :label="'Vetetinario'" id="Vet"
-                ></v-radio>
-                <v-radio
-                    :label="'Dueño'" id="Owner"
-                ></v-radio>
-              </v-radio-group>
-            </v-container>
-
-          </v-form>
-          <v-btn
-              color="primary"
-              @click="e6 = e6+1;valuesVet"
-          >
-            Continue
-          </v-btn>
+              Select
+            </v-btn>
+          </v-card>
+            <v-card>
+              <h1>Dueño de mascota</h1>
+              <p>Responsable del cuidado y protección de una mascota</p>
+              <v-btn
+                  color="primary"
+                  @click="e6 = e6+1;setAccountType('owner')"
+              >
+                Select
+              </v-btn>
+            </v-card>
+          </div>
         </v-stepper-content>
 
         <v-stepper-step
@@ -83,7 +53,36 @@
                   ref="form"
                   v-model="valid"
                   lazy-validation>
-            <template v-if="!vet">
+            <template>
+              <div class="d-flex flex-row">
+                <v-text-field v-model="name"
+                              label="Full Name"
+                              required>
+                </v-text-field>
+
+                <v-text-field v-model="email"
+                              :rules="emailRules"
+                              label="E-mail"
+                              required>
+                </v-text-field>
+              </div>
+              <div class="d-flex flex-row">
+
+                <v-text-field v-model="pass"
+                              :counter="12"
+                              label="Password"
+                              required
+                              type="password">
+                </v-text-field>
+
+                <v-text-field v-model="pass2"
+                              :counter="12"
+                              @change="passwordValidate"
+                              label="Confirm Password"
+                              required
+                              type="password">
+                </v-text-field>
+              </div>
               <div class="d-flex flex-row">
                 <v-text-field v-model="number"
                               label="Número de Telefono"
@@ -97,18 +96,7 @@
               </div>
             </template>
 
-            <template v-else>
-              <div class="d-flex flex-row">
-                <v-text-field v-model="number"
-                              label="Número de Telefono"
-                              required type="number">
-                </v-text-field>
-                <div class="d-flex flex-column">
-                  <span class="ml-auto">Fecha de nacimiento</span>
-
-                  <input type="date" class="float-left">
-                </div>
-              </div>
+            <template v-if="accountType==='vet'">
               <v-text-field v-model="codeVet"
                             :counter="12"
                             label="Codigo de Veterinario"
@@ -147,21 +135,46 @@
         </v-stepper-step>
 
         <v-stepper-content step="3">
-          <div class="d-flex flex-row">
-          <v-card
-              class="vet"
-              v-for="plan in plansVet" :key="plan.title"
-          >
-            <v-card-title>{{plan.title}}</v-card-title>
-            <v-btn
-                color="success"
-                @click="goToTarget"
-            >
-              ELEGIR ->
-            </v-btn>
-          </v-card>
-          </div>
-          <template v-if="valuesVet===true">
+          <template v-if="accountType==='vet'">
+            <div class="d-flex flex-row plans">
+              <v-card
+                  class="vet d-flex flex-column justify-space-between"
+                  v-for="plan in plansVet" :key="plan.title"
+              >
+                <h2 class="text-center font-italic">{{plan.title}}</h2>
+                <h4 id="vetPrice">S/ {{plan.price}}</h4>
+                <div v-for="benefit in plan.benefits" :key="benefit">
+                  <p class="benefit">{{benefit}}</p>
+                </div>
+                <v-btn
+                    color="success"
+                    @click="goToTarget"
+                >
+                  ELEGIR ->
+                </v-btn>
+              </v-card>
+            </div>
+          </template>
+          <template v-else>
+            <div class="d-flex flex-row plansOwner">
+              <v-card
+                  class="owner d-flex flex-column justify-space-between"
+                  v-for="plan in plansOwner" :key="plan.title"
+              >
+                <h2 class="text-center font-italic">{{plan.title}}</h2>
+                <h4 id="ownerPrice">S/ {{plan.price}}</h4>
+                <div v-for="benefit in plan.benefits" :key="benefit">
+                  <p class="benefit">{{benefit}}</p>
+                </div>
+                <v-btn
+                    id="btnOwner"
+                    @click="goToTarget"
+
+                >
+                  ELEGIR ->
+                </v-btn>
+              </v-card>
+            </div>
           </template>
           <v-btn
               color="error"
@@ -218,50 +231,33 @@ export default {
     return {
       e6:1,
       valid: true,
-      vet:true,
       name: '',
       number: '',
       pass: '',
       pass2: '',
       email: '',
       codeVet:'',
+      accountType:'',
       yearsExperience:'',
-      plansVet:[{title:'Basic',price:'Free',benefits:[
-          {
-            benefit: 'Crea y personaliza tu perfil',
-          },
-          {
-            benefit: 'Hazte colaborador de un dueño de veterinario',
-          },
-          {
-            benefit: 'Accede al perfil del negocio de veterinaria al cual estás colaborando',
-          },
+      plansVet:[{title:'Basic',price:0.00,benefits:[
+            'Crea y personaliza tu perfil','Hazte colaborador de un dueño de veterinario','Accede al perfil del negocio de veterinaria al cual estás colaborando'
+
         ]},
-        {title:'Premium',price:'Free',benefits:[
-            {
-              benefit: 'Crea y personaliza tu perfil',
-            },
-            {
-              benefit: 'Hazte colaborador de un dueño de veterinario',
-            },
-            {
-              benefit: 'Accede al perfil del negocio de veterinaria al cual estás colaborando',
-            },
+        {title:'Lite',price:5.99,benefits:[
+              'Todas las funciones de Basic','Obtén hasta 3 espacios en la agenda de citas','Crea un perfil para tu negocio','Asigna a un colaborador para tu veterinaria'
+          ]},
+        {title:'Advanced',price:14.99,benefits:[
+      'Todas las funciones de Basic','Obtén hasta 7 espacios en la agenda de citas','Crea hasta 2 perfiles de tus veterinarias','Asigna hasta 3 colaboradores para tu veterinaria'
+    ]},
+        {title:'Premium',price:19.99,benefits:[
+            'Todas las funciones de Basic','Obtén espacios ilimitados en la agenda de citas','Crea perfiles ilimitados para tus veterinarias','Asigna colaboradores de forma ilimitada para tu veterinaria'
           ]}],
-      plansOwner:[{title:'Basic',price:'Free',benefits:[
-          {
-            benefit: 'Crea y personaliza tu perfil',
-          },
-          {
-            benefit: 'Vincula a una mascota a tu cuenta',
-          },
-          {
-            benefit: 'Registra y gestiona la informacion de tu mascota',
-          },
-          {
-            benefit: 'Visualiza las veterinarias cercanas a tu hogar en nuestro mapa.',
-          },
-        ]}],
+
+      plansOwner:[{title:'Basic',price:0.00,benefits:[
+            'Crea y personaliza tu perfil','Vincula a una mascota a tu cuenta','Registra y gestiona la informacion de tu mascota','Visualiza las veterinarias cercanas a tu hogar en nuestro mapa.']},
+        {title:'Premium',price:5.99,benefits:[
+            'Todas las funciones de Basic','Vincula a todas tus mascotas a tu cuenta','Vincula tus mascotas con tus familiares']}],
+
       emailRules: [
         v => !!v || 'E-mail is required',
         v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
@@ -285,31 +281,14 @@ export default {
       this.$router.push({name: 'login'})
     },
     goToTarget(){
-      if(document.querySelector('#Vet').checked){
-        this.$router.push({name: 'vet-profile'})
-      }else{
-        this.$router.push({name: 'owner'})
-      }
+      if(this.accountType==='vet')
+        this.$router.push({name: 'vet-profile'});
+      else
+        this.$router.push({name: 'owner'});
     },
-    valuesVet(){
-      if(document.querySelector('#Vet').checked){
-        return true;
-      }else{
-        return false;
-      }
+    setAccountType(type){
+      this.accountType=type;
     },
-    valuesOwner(){
-      if(document.querySelector('#Owner').checked){
-        return true;
-      }else{
-        return false;
-      }
-    },
-    vetValue(){
-      if(!document.querySelector('#Vet').checked){
-        this.vet=!this.vet
-      }
-    }
   }
 }
 </script>
@@ -317,10 +296,51 @@ export default {
 
 <style scoped>
 
+#userType{
+  width: 70%;
+  margin: auto;
+}
+
+.plans{
+  width: 90%;
+  justify-content: space-between;
+  margin-bottom: 3%;
+}
+
 .vet{
   border-radius: 10px;
   border: 2px solid #95DB80;
-  width: 10%;
+  width: 20%;
+  text-align: center;
+}
+
+.owner{
+  width: 40%;
+}
+
+#vetPrice{
+  color: #95DB80;
+  font-style: italic;
+}
+
+.benefit{
+  font-size: 15px;
+}
+
+.plansOwner{
+  width: 60%;
+  justify-content: space-between;
+  margin: auto;
+}
+
+#ownerPrice{
+  color: #6ACBFB;
+  font-style: italic;
+}
+
+#btnOwner{
+  background-color: #6ACBFB;
+  color: white;
 }
 
 </style>
