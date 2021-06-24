@@ -48,6 +48,11 @@ const routes = [
     path: '/vets/:id/schedule',
     name: 'vetSchedule',
     component: () => import('../components/schedule')
+  },
+  {
+    path: '/mis-clientes',
+    name: 'mis-clientes',
+    component: () => import('../components/mis-clientes')
   }
 ]
 
