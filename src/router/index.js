@@ -51,8 +51,18 @@ const routes = [
   },
   {
     path: '/recordatories',
-    name: 'Recordatories',
+    name: 'recordatories',
     component: () => import('../components/recordatories')
+  },
+  {
+    path: '/recordatories/new',
+    name: 'add-recordatory',
+    component: () => import('../components/add-recordatory')
+  },
+  {
+    path: '/recordatories/:id',
+    name: 'edit-recordatory',
+    component: () => import('../components/edit-recordatory')
   }
 ]
 

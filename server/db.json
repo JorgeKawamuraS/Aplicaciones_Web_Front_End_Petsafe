@@ -1,14 +1,80 @@
 {
   "veterinaries": [
-    {"id": 2,"name": "Huellitas Seguras","tn":999666333,"src":"https://losmejoresdelima.com/wp-content/uploads/2019/03/Veterinarias.jpg"},
-    {"id": 3,"name": "PetSalud","tn":999666555,"src":"https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"},
-    {"id": 4,"name": "PetSalud","tn":999666555,"src":"https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"},
-    {"id": 5,"name": "Unkown","tn":999666555,"src":"https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"}
+    {
+      "id": 2,
+      "name": "Huellitas Seguras",
+      "tn": 999666333,
+      "src": "https://losmejoresdelima.com/wp-content/uploads/2019/03/Veterinarias.jpg"
+    },
+    {
+      "id": 3,
+      "name": "PetSalud",
+      "tn": 999666555,
+      "src": "https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"
+    },
+    {
+      "id": 4,
+      "name": "PetSalud",
+      "tn": 999666555,
+      "src": "https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Unkown",
+      "tn": 999666555,
+      "src": "https://cdn.mercadonegro.pe/wp-content/uploads/2020/03/cuarentena-coronavirus-peru-veterinarias-1.jpg"
+    }
   ],
   "vetVeterinaries": [
-    {"vetId": 1,"veterinaryId": 2},
-    {"vetId": 1,"veterinaryId": 3},
-    {"vetId": 1,"veterinaryId": 4},
-    {"vetId": 6,"veterinaryId": 5}
+    {
+      "vetId": 1,
+      "veterinaryId": 2
+    },
+    {
+      "vetId": 1,
+      "veterinaryId": 3
+    },
+    {
+      "vetId": 1,
+      "veterinaryId": 4
+    },
+    {
+      "vetId": 6,
+      "veterinaryId": 5
+    }
+  ],
+  "recordatories": [
+    {
+      "id": 1,
+      "description": "Llevar a la mascota de paseo"
+    },
+    {
+      "id": 2,
+      "description": "Llevar a conuslta a las 3:00pm"
+    },
+    {
+      "id": 3,
+      "description": "Backster tiene un baño pendiente el jueves"
+    },
+    {
+      "id": 4,
+      "description": "Haski debe colocarse su siguiente vacuna"
+    },
+    {
+      "id": 5,
+      "description": "Mañana es el cumpleaños de Rocky!"
+    },
+    {
+      "id": 6,
+      "description": "Descripción editada"
+    },
+    {
+      "id": 7,
+      "description": "Backeter debe ir a entrenar al parque"
+    },
+    {
+      "id": 8,
+      "description": ""
+    }
   ]
 }
