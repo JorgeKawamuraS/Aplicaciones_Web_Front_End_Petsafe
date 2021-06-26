@@ -30,9 +30,9 @@ const routes = [
     component: () => import('../components/register')
   },
   {
-    path: '/mis-mascotas',
-    name: 'mis-mascotas',
-    component: () => import('../components/mis-mascotas')
+    path: '/my-pets',
+    name: 'my-pets',
+    component: () => import('../components/my-pets')
   },
   {
     path: '/owner/:id',
@@ -50,9 +50,9 @@ const routes = [
     component: () => import('../components/schedule')
   },
   {
-    path: '/mis-clientes',
-    name: 'mis-clientes',
-    component: () => import('../components/mis-clientes')
+    path: '/my-clients',
+    name: 'my-clients',
+    component: () => import('../components/my-clients')
   }
 ]
 
