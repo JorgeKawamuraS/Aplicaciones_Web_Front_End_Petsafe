@@ -68,6 +68,11 @@ const routes = [
     path: '/side-menu-vet/',
     name: 'side-menu-vet',
     component: () => import('../components/side-menu-vet')
+  },
+  {
+    path: '/vet-requests/',
+    name: 'vet-requests',
+    component: () => import('../components/vet-requests')
   }
 ]
 
