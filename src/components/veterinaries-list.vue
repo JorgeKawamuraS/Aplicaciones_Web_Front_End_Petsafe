@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="b">
   <v-container fluid>
     <v-layout row wrap align-center>
       <v-flex xs8 offset-md2>
@@ -134,6 +134,10 @@ export default {
 
 *{
   //border: 3px solid black;
+}
+
+b{
+  margin: -500px;
 }
 
 

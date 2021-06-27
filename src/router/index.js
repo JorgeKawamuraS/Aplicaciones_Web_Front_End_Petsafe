@@ -10,6 +10,16 @@ const routes = [
     component: ()=>import('../components/Home')
   },
   {
+    path: '/user-home',
+    name: 'user-home',
+    component: ()=>import('../components/home-user')
+  },
+  {
+    path: '/vet-home',
+    name: 'vet-home',
+    component: ()=>import('../components/home-vet')
+  },
+  {
     path: '/vets/:id',
     name: 'vet-profile',
     component: () => import('../components/vet-profile')
@@ -48,6 +58,16 @@ const routes = [
     path: '/vets/:id/schedule',
     name: 'vetSchedule',
     component: () => import('../components/schedule')
+  },
+  {
+    path: '/list-veterinaries/',
+    name: 'list-vterinaries',
+    component: () => import('../components/veterinaries-list')
+  },
+  {
+    path: '/side-menu-vet/',
+    name: 'side-menu-vet',
+    component: () => import('../components/side-menu-vet')
   }
 ]
 

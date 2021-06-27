@@ -10,6 +10,14 @@
     <v-btn text color="white" @click="navigateToRegister">
       Registrate
     </v-btn>
+
+     <v-btn text color="white" @click="vetHome">
+      Perfil Veterinario
+    </v-btn>
+
+    <v-btn text color="white" @click="userHome">
+      Perfil Usuario
+    </v-btn>
   </v-app-bar>
 </template>
 
@@ -22,6 +30,12 @@ export default {
     },
     navigateToRegister(){
       this.$router.push({name:'register'});
+    },
+    vetHome(){
+      this.$router.push({name:'vet-home'});
+    },
+    userHome(){
+      this.$router.push({name:'user-home'});
     }
   }
 }
