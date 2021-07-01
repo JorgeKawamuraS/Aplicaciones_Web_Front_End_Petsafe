@@ -10,7 +10,11 @@ Para la implementación del Frotn End se hizo uso de:
 
 
 -WebStorm.
+
+
 -Vue.
+
+
 -Vuetify.
 
 
