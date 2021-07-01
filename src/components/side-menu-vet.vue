@@ -28,7 +28,7 @@ export default {
       options:[
           {id:1,name:'Perfil',src:'/vets/1'},
           {id:3,name:'Agenda',src:'/vets/1/schedule'},
-          {id:4,name:'Clientes',src:''},
+          {id:4,name:'Clientes',src:'/my-clients'},
           {id:5,name:'Solicitud',src:''},
           {id:6,name:'Tratamientos',src:''},
           {id:7,name:'Buzon',src:''}],

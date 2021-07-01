@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import PetsList from "./mis-mascotas";
+import PetsList from "./my-pets";
 import SideMenuVet from "./side-menu-vet";
 
 export default {
