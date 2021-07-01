@@ -31,7 +31,7 @@ export default {
           {id:4,name:'Clientes',src:'/my-clients'},
           {id:5,name:'Solicitud',src:''},
           {id:6,name:'Tratamientos',src:''},
-          {id:7,name:'Buzon',src:''}],
+          {id:7,name:'Buzon',src:'/owner/1/mailbox'}],
       extras:[
           {id:8,name:'Ayuda',src:''},
           {id:9,name:'Configuracion',src:''}]
