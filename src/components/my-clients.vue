@@ -4,6 +4,9 @@
     <v-app-bar fixed app color="primary" light clipped-left class="elevation-2">
       <v-app-bar-nav-icon class="white--text" @click="toggleDrawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="white--text"><img src="../images/logo.png" alt="logo" width="170" height="60"></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn text color="white" to="/profile">{{ currentUser.username }}</v-btn>
+      <v-btn text color="white" @click.prevent="logout">CERRAR SESIÓN</v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -259,10 +262,9 @@
 
 <script>
 import SideMenuVet from "./side-menu-vet"
-
 export default {
   name: "mis-clientes",
-  components: {SideMenuVet},
+  components: { SideMenuVet },
   data(){
     return{
       dialog: false,
@@ -280,7 +282,6 @@ export default {
         {text: 'Owner Name', value: 'ownername'},
         {text: 'Age', value: 'age'},
         {text: 'Sex', value: 'sex'},
-
         {text: 'Actions', value: 'actions', sortable: false},
       ],
       clients: [],
@@ -305,11 +306,15 @@ export default {
       }
     }
   },
+
   methods:{
     toggleDrawer() {
       this.drawer = !this.drawer;
     },
-
+    logout(){
+      this.$store.dispatch('auth/logout');
+      this.$router.push({name:'home'})
+    },
     initialize() {
       this.clients = [
         {
@@ -374,33 +379,27 @@ export default {
         },
       ]
     },
-
     editItem(item) {
       this.editedIndex = this.clients.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialog = true
     },
-
     addMeeting(item){
       this.defaultSchedule = this.clients.indexOf(item)
       this.dialog2 = true
     },
-
     showHistory(){
       this.dialog3 = true
     },
-
     deleteItem(item) {
       this.editedIndex = this.clients.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.dialogDelete = true
     },
-
     deleteItemConfirm() {
       this.clients.splice(this.editedIndex, 1)
       this.closeDelete()
     },
-
     close() {
       this.dialog = false
       this.dialog2 = false
@@ -410,7 +409,6 @@ export default {
         this.editedIndex = -1
       })
     },
-
     closeDelete() {
       this.dialogDelete = false
       this.$nextTick(() => {
@@ -418,7 +416,6 @@ export default {
         this.editedIndex = -1
       })
     },
-
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.clients[this.editedIndex], this.editedItem)
@@ -428,13 +425,15 @@ export default {
       this.close()
     },
   },
-
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? 'New Client' : 'Edit Client'
     },
+    currentUser(){
+      console.log(this.$store.state.auth.user);
+      return this.$store.state.auth.user;
+    }
   },
-
   watch: {
     dialog(val) {
       val || this.close()
@@ -443,13 +442,14 @@ export default {
       val || this.closeDelete()
     },
   },
-
   created() {
-    this.initialize()
+    this.initialize();
+    if(!this.currentUser){
+      this.$router.push('/login');
+    }
   },
 }
 </script>
 
 <style scoped>
-
 </style>

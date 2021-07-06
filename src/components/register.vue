@@ -22,7 +22,7 @@
             <p>Profesional encargado de la salud de animales</p>
             <v-btn
                 color="primary"
-                @click="e6 = e6+1;setAccountType('vet')"
+                @click="e6 = e6+1;user.userTypeVet=true"
             >
               Select
             </v-btn>
@@ -32,7 +32,7 @@
               <p>Responsable del cuidado y protección de una mascota</p>
               <v-btn
                   color="primary"
-                  @click="e6 = e6+1;setAccountType('owner')"
+                  @click="e6 = e6+1;user.userTypeVet=false"
               >
                 Select
               </v-btn>
@@ -55,12 +55,7 @@
                   lazy-validation>
             <template>
               <div class="d-flex flex-row">
-                <v-text-field v-model="name"
-                              label="Full Name"
-                              required>
-                </v-text-field>
-
-                <v-text-field v-model="email"
+                <v-text-field v-model="user.mail"
                               :rules="emailRules"
                               label="E-mail"
                               required>
@@ -68,13 +63,15 @@
               </div>
               <div class="d-flex flex-row">
 
-                <v-text-field v-model="pass"
+                <v-text-field v-model="user.password"
                               :counter="12"
                               label="Password"
                               required
                               type="password">
                 </v-text-field>
 
+              </div>
+              <div class="d-flex flex-row">
                 <v-text-field v-model="pass2"
                               :counter="12"
                               @change="passwordValidate"
@@ -83,32 +80,6 @@
                               type="password">
                 </v-text-field>
               </div>
-              <div class="d-flex flex-row">
-                <v-text-field v-model="number"
-                              label="Número de Telefono"
-                              required type="number">
-                </v-text-field>
-                <div class="d-flex flex-column">
-                  <span class="ml-auto">Fecha de nacimiento</span>
-
-                  <input type="date" class="float-left">
-                </div>
-              </div>
-            </template>
-
-            <template v-if="accountType==='vet'">
-              <v-text-field v-model="codeVet"
-                            :counter="12"
-                            label="Codigo de Veterinario"
-                            type="number" >
-              </v-text-field>
-
-              <v-text-field v-model="yearsExperience"
-                            :counter="2"
-                            type="number"
-                            label="Años de experiencia"
-              >
-              </v-text-field>
             </template>
 
           </v-form>
@@ -135,7 +106,7 @@
         </v-stepper-step>
 
         <v-stepper-content step="3">
-          <template v-if="accountType==='vet'">
+          <template v-if="user.userTypeVet">
             <div class="d-flex flex-row plans">
               <v-card
                   class="vet d-flex flex-column justify-space-between"
@@ -148,7 +119,7 @@
                 </div>
                 <v-btn
                     color="success"
-                    @click="goToTarget"
+                    @click="handleRegister"
                 >
                   ELEGIR ->
                 </v-btn>
@@ -168,7 +139,7 @@
                 </div>
                 <v-btn
                     id="btnOwner"
-                    @click="goToTarget"
+                    @click="handleRegister"
 
                 >
                   ELEGIR ->
@@ -223,6 +194,8 @@
 </style>
 
 <script>
+import User from "@/models/user";
+
 export default {
   name: "register",
   props:{
@@ -231,14 +204,9 @@ export default {
     return {
       e6:1,
       valid: true,
-      name: '',
-      number: '',
-      pass: '',
+      user: new User('','','',''),
       pass2: '',
-      email: '',
-      codeVet:'',
-      accountType:'',
-      yearsExperience:'',
+      message:'',
       plansVet:[{title:'Basic',price:0.00,benefits:[
             'Crea y personaliza tu perfil','Hazte colaborador de un dueño de veterinario','Accede al perfil del negocio de veterinaria al cual estás colaborando'
 
@@ -267,27 +235,39 @@ export default {
     }
   },
   methods: {
+    handleRegister(){
+      this.message ='';
+      if(this.valid){
+        this.$store.dispatch('auth/register',this.user).then(
+            data=>{
+              this.message=data.message;
+              this.goToLogin();
+            },
+            error=>{
+              this.message=(error.response && error.response.data)
+                  || error.message || error.toString();
+            }
+        )
+      }
+    },
     validate() {
-      this.goToTarget(this.vet);
+
     },
     passwordValidate() {
-      if(this.pass !== this.pass2){
+      if(this.user.password !== this.pass2){
         alert('Ambas contraseñas deben ser iguales!')
       }
       else
         return 1
     },
     goToLogin() {
-      this.$router.push({name: 'login'})
+      this.$router.push({name: 'login'});
     },
     goToTarget(){
-      if(this.accountType==='vet')
-        this.$router.push({name: 'vet-profile'});
-      else
-        this.$router.push({name: 'owner'});
+      this.$router.push({name: 'login'});
     },
     setAccountType(type){
-      this.accountType=type;
+        this.accountType=type;
     },
   }
 }

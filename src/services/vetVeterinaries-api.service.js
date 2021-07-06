@@ -1,17 +1,9 @@
-import axios from 'axios';
+import http from "@/services/common/http.common";
 
 class VetVeterinariesApiService{
-    http = null;
-
-    constructor() {
-        this.http = axios.create({
-            baseUrl: 'http://localhost:3000/api',
-            headers: {'Content-type': 'application/json'}
-        })
-    }
 
     getVetVeterinariesByVetId(id){
-        return this.http.get(`/vetVeterinaries?vetId=${id}`);
+        return http.get(`/vets/${id}/vetveterinaries`);
     }
 
 

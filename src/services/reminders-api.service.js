@@ -1,6 +1,6 @@
-import http from './http.common'
+import http from './common/http.common'
 
-class RecordatoriesApiService {
+class RemindersApiService {
     getAll() {
         return http.get('/recordatories');
     }
@@ -21,4 +21,4 @@ class RecordatoriesApiService {
     }
 }
 
-export default new RecordatoriesApiService();
+export default new RemindersApiService();

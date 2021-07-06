@@ -4,6 +4,9 @@
     <v-app-bar fixed app color="primary" light clipped-left class="elevation-2">
       <v-app-bar-nav-icon class="white--text" @click="toggleDrawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="white--text"><img src="../images/logo.png" alt="logo" width="170" height="60"></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn text color="white" to="/profile">{{ currentUser.username }}</v-btn>
+      <v-btn text color="white" @click.prevent="logout">CERRAR SESIÓN</v-btn>
     </v-app-bar>
 
     <br/><br/>
@@ -13,7 +16,7 @@
 
     </div>
     <br/><br/>
-    <h2 class="text-center, display-1 ">Mi buzon</h2>
+    <h2 class="text-center, display-1 ">Mi buzón</h2>
 
     <v-main>
       <v-container>
@@ -51,7 +54,6 @@
                   >
                     New Client
                   </v-btn>
-
                 </template>-->
                 <v-spacer></v-spacer>
                 <v-card>
@@ -260,35 +262,6 @@
           <template v-slot:[`item.actions`]="{  }" class="align-left">
             <p align="left"> <input type="button" value="Agregar a agenda" align="center" @click = "addToSchedule()" /> </p>
             <p align="left"> <input type="button" value="Ver información" align="center" @click="showHistory()"/> </p>
-            <!--
-            <v-icon
-                small
-                @click="addMeeting()"
-
-            >
-              mdi-calendar
-            </v-icon>
-            <v-icon
-                small
-                @click="showHistory()"
-
-            >
-              mdi-note-text
-            </v-icon>
-
-            <v-icon
-                small
-                class="mr-2"
-                @click="editItem(item)"
-            >
-              mdi-pencil
-            </v-icon>
-            <v-icon
-                small
-                @click="deleteItem(item)"
-            >
-              mdi-delete
-            </v-icon>-->
           </template>
           <template v-slot:no-data>
             <v-btn
@@ -308,7 +281,7 @@
 import SideMenuVet from "./side-menu-vet"
 export default {
   name: "mailbox",
-  components: {SideMenuVet},
+  components: { SideMenuVet },
   data(){
     return{
       dialog: false,
@@ -319,13 +292,8 @@ export default {
       drawer: false,
       headers: [
         {
-
-          //text: 'Pet Name',
-          //align: 'start',
-          //sortable: false,
           value: 'summary',
         },
-
         {text: '', value: 'actions', sortable: false},
       ],
       notifications: [],
@@ -349,36 +317,28 @@ export default {
       this.drawer = !this.drawer;
     },
     initialize() {
-
       this.notifications = [
         {
           summary: 'Lorem ipsum dolor sit ametisicing elit. lficiis quibus voluptatum!e',
         },
         {
           summary: 'Lorem ipsum dolor sit ametisicing elit. lficiis quibus voluptatum!y',
-
         },
         {
           summary: 'LLorem ipsum dolor sit ametisicing elit. lficiis quibus voluptatum!a',
-
         },
         {
           summary: 'CLorem ipsum dolor sit ametisicing elit. lficiis quibus voluptatum!s',
-
         },
         {
           summary: 'SLorem ipsum dolor sit ametisicing elit. lficiis quibus voluptatum!by',
-
         },
         {
           summary: 'FLorem ipsum dolor sit ametisicing elit. lficiis quibus voluptatum!',
-
         },
         {
           summary: 'Lorem ipsum dolor sit ametisicing elit. lficiis quibus voluptatum!',
-
         },
-
       ]
     },
     editItem(item) {
@@ -430,11 +390,19 @@ export default {
       }
       this.close()
     },
+    logout(){
+      this.$store.dispatch('auth/logout');
+      this.$router.push({name:'home'})
+  }
   },
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? 'New Client' : 'Edit Client'
     },
+    currentUser(){
+      console.log(this.$store.state.auth.user);
+      return this.$store.state.auth.user;
+    }
   },
   watch: {
     dialog(val) {
@@ -445,10 +413,14 @@ export default {
     },
   },
   created() {
-    this.initialize()
+    this.initialize();
+    if(!this.currentUser){
+      this.$router.push('/login');
+    }
   },
 }
 </script>
 
 <style scoped>
+
 </style>

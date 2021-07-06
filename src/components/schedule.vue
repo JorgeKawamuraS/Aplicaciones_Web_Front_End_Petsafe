@@ -5,6 +5,9 @@
     <v-app-bar fixed app color="primary" light clipped-left class="elevation-2">
       <v-app-bar-nav-icon class="white--text" @click="toggleDrawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="white--text"><img src="../images/logo.png" alt="logo" width="170" height="60"></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn text color="white" to="/profile">{{ currentUser.username }}</v-btn>
+      <v-btn text color="white" @click.prevent="logout">CERRAR SESIÓN</v-btn>
     </v-app-bar>
 
     <div>
@@ -104,10 +107,25 @@ export default {
 
     }
   },
+  computed:{
+    currentUser(){
+      console.log(this.$store.state.auth.user);
+      return this.$store.state.auth.user;
+    }
+  },
   methods:{
     toggleDrawer() {
       this.drawer = !this.drawer;
     },
+    logout(){
+      this.$store.dispatch('auth/logout');
+      this.$router.push({name:'home'})
+    }
+  },
+  created() {
+    if(!this.currentUser){
+      this.$router.push('/login');
+    }
   }
 }
 </script>

@@ -1,30 +1,22 @@
-import axios from 'axios';
+import http from './common/http.common';
 
 class SpecialtiesApiService{
-    http = null;
-
-    constructor() {
-        this.http = axios.create({
-            baseUrl: 'http://lacuenta-001-site1.itempurl.com/api',
-            headers: {'Content-type': 'application/json'}
-        })
-    }
 
     getAll(){
-        return this.http.get('/specialties');
+        return http.get('/specialties');
     }
 
     getById(id){
-        return this.http.get(`/specialties/${id}`);
+        return http.get(`/specialties/${id}`);
     }
     create(data){
-        return this.http.post(`/specialties`,data);
+        return http.post(`/specialties`,data);
     }
     delete(id){
-        return this.http.delete(`/specialties/${id}`);
+        return http.delete(`/specialties/${id}`);
     }
     update(id,data){
-        return this.http.put(`/specialties/${id}`,data);
+        return http.put(`/specialties/${id}`,data);
     }
 }
 

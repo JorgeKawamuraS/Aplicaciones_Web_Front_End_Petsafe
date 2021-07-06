@@ -3,7 +3,6 @@
     <header-home></header-home>
   <header class="flex-row"></header>
   <div>
-
   <div>
     <v-container grid-list-md>
       <v-layout row wrap justify-center>
@@ -26,58 +25,11 @@
   </div>
 
   <div>
-    <br/><h1 align="center" >Ultimas Veterinarias Afiliadas</h1>
-  <v-container grid-list-md>
+    <br/><h1 align="center" >Últimas Veterinarias Afiliadas</h1>
+  <v-container grid-list>
     <v-layout row wrap>
-      <v-flex xs8 sm4>
-        <v-card>
-          <v-img src = "../images/vets.jpg" height="450px"></v-img>
-
-          <v-card-title>Mascotas Felices</v-card-title>
-
-          <v-card-text>
-            Breve descripcion de la veterinario en cuestion
-          </v-card-text>
-
-          <v-card-actions >
-            <v-btn color="info" flat> Ver Perfil </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-
-      <v-flex xs8 sm4>
-        <v-card>
-          <v-img src = "../images/vets2.jpg" height="450px"></v-img>
-
-          <v-card-title>DogTor</v-card-title>
-
-          <v-card-text>
-            Breve descripcion de la veterinario en cuestion
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn color="info" flat> Ver Perfil </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-
-      <v-flex xs8 sm4>
-        <v-card>
-          <v-img src = "../images/vets3.png" height="450px"></v-img>
-
-          <v-card-title>Friendly Pets</v-card-title>
-
-          <v-card-text>
-            Breve descripcion de la veterinario en cuestion
-          </v-card-text>
-
-          <v-card-actions>
-            <v-btn color="info" flat> Ver Perfil </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
+        <veterinaries-home></veterinaries-home>
     </v-layout >
-    <br/><br/><br/>
   </v-container>
   </div>
 
@@ -139,8 +91,7 @@
   <div>
     <v-container align="center" grid-list-md>
       <v-layout justify-center>
-    <v-img src = "../images/a.png" align="center" width="1000px" height="700px" ></v-img>
-
+        <iframe width="800" height="500" src="https://www.youtube.com/embed/6MVARCZQeEU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </v-layout>
       <br/><h>Video Referencial del Producto</h>
     </v-container>
@@ -157,9 +108,10 @@
 
 import FooterHome from "./footer-home";
 import HeaderHome from "./header-home";
+import VeterinariesHome from "@/components/profiles/veterinaries-home";
 export default {
   name: "home",
-  components: {HeaderHome, FooterHome},
+  components: {VeterinariesHome, HeaderHome, FooterHome},
   data(){
   },
 
